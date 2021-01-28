@@ -42,5 +42,16 @@ namespace MVCExample.Controllers
             
             return "Спасибо за покупку!";
         }
+
+        public string Hello(int id)
+        {
+            return $"id = {id}";
+        }
+
+        public string Square(int a = 3, int h = 10)
+        {
+            double s = a * h / 2;
+            return $"Площадь треугольника с основанием {a} и высотой {h} равна {s}";
+        }
     }
 }
