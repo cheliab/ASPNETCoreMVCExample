@@ -6,6 +6,11 @@ namespace MVCExample.Controllers
 {
     public class MathController : Controller
     {
+        public IActionResult Index()
+        {
+            return View();
+        }
+        
         /// <summary>
         /// Обработка сложных объектов в запросе
         /// 
@@ -14,9 +19,26 @@ namespace MVCExample.Controllers
         /// </summary>
         /// <param name="geometry"></param>
         /// <returns></returns>
+        [HttpGet]
         public string Area(Geometry geometry)
         {
             return $"Площадь треугольника с основанием {geometry.Altitude} и высотой {geometry.Height} равна {geometry.GetArea()}";
+        }
+
+        /// <summary>
+        /// Обработка параметров из Post запроса
+        ///
+        /// Пример:
+        /// /Math/Index
+        /// </summary>
+        /// <param name="altitude"></param>
+        /// <param name="height"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public string Area(int altitude, int height)
+        {
+            double square = altitude * height / 2;
+            return $"Площадь треугольника с основанием {altitude} и высотой {height} равна {square}";
         }
 
         /// <summary>
