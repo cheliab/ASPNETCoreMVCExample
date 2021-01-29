@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using MVCExample.ControllersParams;
 
@@ -52,6 +53,48 @@ namespace MVCExample.Controllers
         public string NumSum(int[] nums)
         {
             return $"Сумма чисел равна {nums.Sum()}";
+        }
+
+        /// <summary>
+        /// Пример получения параметров из объекта Request
+        ///
+        /// Пример:
+        /// /Math/RequestObjectGetExample?altitude=6&height=6
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public string RequestObjectGetExample()
+        {
+            string altitudeString = Request.Query.FirstOrDefault(p => p.Key == "altitude").Value;
+            int altitude = Int32.Parse(altitudeString);
+
+            string heightString = Request.Query.FirstOrDefault(p => p.Key == "height").Value;
+            int height = Int32.Parse(heightString);
+
+            double square = altitude * height / 2;
+            
+            return $"Площадь треугольника с основанием {altitude} и высотой {height} равна {square}";
+        }
+
+        /// <summary>
+        /// Пример получение параметров из объекта Request
+        ///
+        /// Пример:
+        /// Math/Index
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        public string RequestObjectPostExample()
+        {
+            string altitudeString = Request.Form.FirstOrDefault(p => p.Key == "altitude").Value;
+            int altitude = Int32.Parse(altitudeString);
+
+            string heightString = Request.Form.FirstOrDefault(p => p.Key == "height").Value;
+            int height = Int32.Parse(heightString);
+
+            double square = altitude * height / 2;
+            
+            return $"Площадь треугольника с основанием {altitude} и высотой {height} равна {square}";
         }
     }
 }
